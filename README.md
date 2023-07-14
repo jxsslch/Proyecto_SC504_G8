@@ -7,7 +7,7 @@ PROCEDURE get_doctor_details ###Listo###
 
 PROCEDURE insert_doctor
 
-PROCEDURE update_doctor
+PROCEDURE update_doctor ###Listo!!!###
 
 PROCEDURE delete_doctor
 
