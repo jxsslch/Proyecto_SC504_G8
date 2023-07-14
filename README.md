@@ -5,23 +5,23 @@ Proyecto final para Lenguaje de Base de Datos
 
 PROCEDURE get_doctor_details ###Listo###
 
-PROCEDURE insert_doctor
+PROCEDURE insert_doctor <<<Listo!!!>>>
 
-PROCEDURE update_doctor ###Listo!!!###
+PROCEDURE update_doctor <<<Listo!!!>>>
 
-PROCEDURE delete_doctor
+PROCEDURE delete_doctor <<<Listo!!!>>>
 
-PROCEDURE get_telDoctor_details
+PROCEDURE get_telDoctor_details <<<Listo!!!>>>
 
-PROCEDURE insert_telDoctor
+PROCEDURE insert_telDoctor <<<Listo!!!>>>
 
-PROCEDURE update_telDoctor
+PROCEDURE update_telDoctor <<<Listo!!!>>>
 
-PROCEDURE delete_telDoctor
+PROCEDURE delete_telDoctor <<<Listo!!!>>>
 
-PROCEDURE get_horario_details
+PROCEDURE get_horario_details <<<Listo!!!>>>
 
-PROCEDURE insert_horario
+PROCEDURE insert_horario <<<Listo!!!>>>
 
 PROCEDURE update_horario
 
@@ -138,11 +138,11 @@ TRIGGER after_delete_paciente
 
 ##Cursores:
 
-CURSOR doctor_cursor
+CURSOR doctor_cursor <<<Listo!!!>>>
 
-CURSOR telDoctor_cursor
+CURSOR telDoctor_cursor <<<Listo!!!>>>
 
-CURSOR horario_cursor
+CURSOR horario_cursor <<<Listo!!!>>>
 
 CURSOR medicamento_cursor
 
