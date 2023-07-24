@@ -14,4 +14,28 @@ public interface DoctorDao extends JpaRepository<Doctor, Long> {
     
     @Procedure(name = "Doctor.getDetails")
     List<HashMap<String,Object>> getDoctorDetails(@Param("p_cedDoctor") Long cedDoctor);
+    
+    @Procedure(name = "Doctor.getDoctors")
+    List<Doctor> getDoctors();
+    
+    @Procedure(name = "TraerDoctor", outputParameterName = "v_doctor")
+    Doctor traerDoctor(@Param("p_cedDoctor") Long cedDoctor);
+    
+    @Procedure(name = "AgregarDoctor")
+    void agregarDoctor(@Param("p_cedDoctor") Long cedDoctor, 
+            @Param("p_puesto") String puesto,
+            @Param("p_nomDoctor") String nombre,
+            @Param("p_genero") String genero,
+            @Param("p_idHorario") Long idHorario);
+    
+    @Procedure(name = "ActualizarDoctor")
+    void actualizarDoctor(@Param("p_cedDoctor") Long cedDoctor, 
+            @Param("p_puesto") String puesto,
+            @Param("p_nomDoctor") String nombre,
+            @Param("p_genero") String genero,
+            @Param("p_idHorario") Long idHorario);
+    
+    @Procedure(name="EliminarDoctor")
+    void eliminarDoctor(@Param("p_cedDoctor") Long cedDoctor);
+
 }

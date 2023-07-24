@@ -19,6 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <header>
             <title></title>
         </header>
+
         <main class="d-flex flex-nowrap">
             <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark h-100" style="width:280px;">
                 <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> 
@@ -26,13 +27,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item"><a href="#" class="nav-link active">First</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link active">Doctor</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white">Second</a></li>
                 </ul>
             </div>
+
             <div class="container">
                 <div class="container">
-                    <h2 class="mt-3">Doctor Table</h2>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-9">
+                            <h2 class="">Doctor Table</h2>
+                        </div>
+                        <div class="col">
+                            <button data-bs-toggle="modal" type="button" data-bs-target="#addDoctorModal" class="btn btn-success">
+                                <i class="fa fa-plus"></i><span> Añadir Doctor</span>
+                            </button>
+                            <button data-toggle="modal" type="button" data-bs-target="#deleteDoctorModal" class="btn btn-danger" >
+                                <i class="fa fa-minus"></i><span> Borrar</span>
+                            </button>	
+
+                        </div>
+                    </div>
+
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -41,42 +58,171 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <th>NomDoctor</th>
                                 <th>Genero</th>
                                 <th>IdHorario</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="doctor : ${Doctores}" th:id="${doctor.ceddoctor}">
-                                <td><a th:href="@{/{id}(id=${doctor.ceddoctor})}">[[${doctor.ceddoctor}]]</a></td>
+                                <td><a th:href="@{/}+${doctor.ceddoctor}">[[${doctor.ceddoctor}]]</a></td>
                                 <td>[[${doctor.puesto}]]</td>
                                 <td>[[${doctor.nomdoctor}]]</td>
                                 <td>[[${doctor.genero}]]</td>
-                                <td>[[${doctor.idhorario}]]</td>
+                                <td th:text="${doctor.horario.idHorario} ?: 'Desconocido'"></td>
+                                <td>
+                                    <a data-bs-toggle="modal" type="button" data-bs-target="#editDoctorModal" class="edit" 
+                                       th:attr="onclick=|populateModalFields('${doctor.ceddoctor}', '${doctor.puesto}', '${doctor.nomdoctor}', '${doctor.genero}', '${doctor.horario.idHorario}')|">
+                                        <i class="fa fa-edit" data-toggle="tooltip" title="Editar"></i>
+                                    </a>
+                                    <a data-bs-toggle="modal" type="button" data-bs-target="#deleteDoctorModal" class="delete"
+                                       th:attr="onclick=|deleteModalField('${doctor.ceddoctor}')|">
+                                        <i class="fa fa-trash" data-toggle="tooltip" title="Borrar"></i>
+                                    </a>
+                                </td>
                         </tbody>
                     </table>
                 </div>
             </div>
         </main>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const navLinks = document.querySelectorAll('.nav-link');
+        <!-- Add Modal HTML -->
+        <section>
+            <div id="addDoctorModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addDoctorModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form th:action="@{/guardar}" th:object="${doctor}" method="POST">
+                            <div class="modal-header">						
+                                <h4 class="modal-title">Añadir Doctor</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                            </div>
+                            <div class="modal-body">					
+                                <div class="form-group">
+                                    <label for="ceddoctor">Cédula</label>
+                                    <input type="text" class="form-control" name="ceddoctor" required>
+                                </div>
 
-                navLinks.forEach(function (link) {
-                    link.addEventListener('click', function (event) {
-                        event.preventDefault();
+                                <div class="form-group">
+                                    <label for="puesto">Puesto</label>
+                                    <input type="text" class="form-control" name="puesto" required>
+                                </div>
 
-                        if (!link.classList.contains('active')) {
-                            const activeLink = document.querySelector('.nav-link.active');
-                            activeLink.classList.remove('active');
-                            activeLink.classList.add('text-white');
+                                <div class="form-group">
+                                    <label for="nomdoctor">Nombre</label>
+                                    <input type="text" class="form-control" name="nomdoctor" required></input>
+                                </div>
 
-                            link.classList.add('active');
-                            link.classList.remove('text-white');
-                        }
-                    });
-                });
-            });
-        </script>
+                                <div class="form-group">
+                                    <label for="genero">Genero</label>
+                                    <div class="form-group">
+                                        <select class="form-select" name="genero" required>
+                                            <option  value="H">Hombre</option>
+                                            <option  value="M">Mujer</option>
+                                        </select>
+                                    </div>
+                                </div> 
 
+                                <div class="form-group">
+                                    <label for="idHorario">Horario</label>
+                                    <div class="form-group">
+                                        <select class="form-select" name="horario.idHorario"  required>
+                                            <option th:each='doctor : ${Doctores}' th:text="${doctor.horario.dias}" th:value="${doctor.horario.idHorario}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                <input type="submit" class="btn btn-success" value="Add">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Edit Modal HTML -->
+        <section>
+            <div id="editDoctorModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editDoctorModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form th:action="@{/actualizar}" th:object="${doctor}" method="POST">
+                            <div class="modal-header">						
+                                <h4 class="modal-title">Editar Doctor</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                            </div>
+                            <div class="modal-body">					
+                                <div class="form-group">
+                                    <label for="ceddoctor">Cédula</label>
+                                    <input id="cedula" type="text" readonly class="form-control-plaintext" name="ceddoctor">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="puesto">Puesto</label>
+                                    <input id="puesto" type="text" class="form-control" name="puesto" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nomdoctor">Nombre</label>
+                                    <input id="nombre" type="text" class="form-control" name="nomdoctor" required></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="genero">Genero</label>
+                                    <div class="form-group">
+                                        <select id="btn-genero" class="form-select" name="genero" required>
+                                            <option  value="H">Hombre</option>
+                                            <option  value="M">Mujer</option>
+                                        </select>
+                                    </div>
+                                </div> 
+
+                                <div class="form-group">
+                                    <label for="idHorario">Horario</label>
+                                    <div class="form-group">
+                                        <select id="btn-dias" class="form-select" name="horario.idHorario"  required>
+                                            <option th:each='doctor : ${Doctores}' th:text="${doctor.horario.dias}" th:value="${doctor.horario.idHorario}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                <input type="submit" class="btn btn-success" value="Update">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Delete Modal HTML -->
+        <section>
+            <div id="deleteDoctorModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form th:action="@{/borrar}" th:object="${doctor}" method="POST">
+                            <input id='hiddenCedula' type='hidden' name='ceddoctor'>
+                            <div class="modal-header">						
+                                <h4 class="modal-title">Borrar Doctor</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="close"></button>
+                            </div>
+                            <div class="modal-body">					
+                                <p>Are you sure you want to delete these Records?</p>
+                                <p class="text-warning"><small>This action cannot be undone.</small></p>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <script th:src="@{../static/Doctor.js}" type="text/javascript"></script>
     </body>
 
 
