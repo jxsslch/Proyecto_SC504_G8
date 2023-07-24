@@ -6,9 +6,17 @@ package com.hospital.v1.domain;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Horario")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Horario {
     
     @Id
@@ -21,32 +29,5 @@ public class Horario {
 
     @Column(name = "horas")
     private String horas;
-
-    public Horario() {
-    }
-
-    public Horario(Long idHorario, String dias, String horas) {
-        this.idHorario = idHorario;
-        this.dias = dias;
-        this.horas = horas;
-    }    
-
-    public Long getIdHorario() {
-        return idHorario;
-    }
-
-    public void setIdHorario(Long idHorario) {
-        this.idHorario = idHorario;
-    }
-
-    public String getDias() {
-        return dias;
-    }
-
-    public String getHoras() {
-        return horas;
-    }
-    
-    
     
 }

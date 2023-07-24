@@ -28,15 +28,7 @@ public class DoctorController {
 
     @GetMapping("/")
     public String listAll(Model model) {
-        System.out.println(request.getRequestURI().substring(request.getRequestURI().indexOf('/')).endsWith("/"));
         var Doctores = docService.getDoctors();
-        for(var i: Doctores) {
-            System.out.println(i.getHorario());
-            if(i.getHorario()!=null){
-                System.out.println(i.getHorario().getIdHorario());
-            }
-            
-        }
         model.addAttribute("Doctores", Doctores);
         return "index";
     }

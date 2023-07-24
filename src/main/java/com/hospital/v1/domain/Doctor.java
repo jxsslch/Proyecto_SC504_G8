@@ -5,6 +5,10 @@
 package com.hospital.v1.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Doctor")
@@ -67,6 +71,10 @@ import jakarta.persistence.*;
     }
 )
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Doctor {
 
     @Id
@@ -79,62 +87,5 @@ public class Doctor {
     
     @JoinColumn(name = "IDHORARIO", referencedColumnName="IDHORARIO")
     @ManyToOne
-    private Horario horario;
-
-    public Doctor() {
-    }
-    
-    
-    
-    public Doctor(Long ceddoctor, String puesto, String nomdoctor, String genero, Horario horario) {
-        this.ceddoctor = ceddoctor;
-        this.puesto = puesto;
-        this.nomdoctor = nomdoctor;
-        this.genero = genero;
-        this.horario = horario;
-    }
-
-    public Long getCeddoctor() {
-        return ceddoctor;
-    }
-
-    public void setCeddoctor(Long ceddoctor) {
-        this.ceddoctor = ceddoctor;
-    }
-
-    public String getPuesto() {
-        return puesto;
-    }
-
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
-    }
-
-    public String getNomdoctor() {
-        return nomdoctor;
-    }
-
-    public void setNomdoctor(String nomdoctor) {
-        this.nomdoctor = nomdoctor;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public Horario getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-
-   
-    
-    
+    private Horario horario;    
 }
