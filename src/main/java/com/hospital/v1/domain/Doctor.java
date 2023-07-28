@@ -87,5 +87,9 @@ public class Doctor {
     
     @JoinColumn(name = "IDHORARIO", referencedColumnName="IDHORARIO")
     @ManyToOne
-    private Horario horario;    
+    private Horario horario;
+    
+
+
+   
 }

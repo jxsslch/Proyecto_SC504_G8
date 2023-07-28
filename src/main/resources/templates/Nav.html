@@ -16,19 +16,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <header>
-            <title></title>
-        </header>
-
+        
         <section th:fragment='asideNav'>
             <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark h-100" style="width:280px;">
-                <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> 
+                <a th:href="@{/}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> 
                     <span class="fs-4">Home</span>
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item"><a href="#" class="nav-link active">Doctor</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Second</a></li>
+                    <li class="nav-item">
+                        <a th:href="@{/}" th:classappend="${activePage == 'home' ? 'nav-link active' : 'nav-link text-white'}" >Doctor</a>
+                        <nav class="nav flex-column" th:switch="${activePage}">
+                            <a class="nav-link text-white ms-3 my-1"  th:href='@{/telDoctor/}'
+                               th:case="'home'"
+                               >Tel. Doctor
+                            </a>
+                            <a class="nav-link active text-white ms-3 my-1" th:href='@{/telDoctor/}'
+                               th:case="'telDocs'"
+                               >Tel. Doctor
+                            </a>
+                        </nav>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/horario/}"  th:classappend="${activePage == 'horario' ? 'nav-link active' : 'nav-link text-white'}">Horario</a>
+                    </li>
                 </ul>
             </div>
         </section>    

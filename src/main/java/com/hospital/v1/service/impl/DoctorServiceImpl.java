@@ -4,6 +4,7 @@ import com.hospital.v1.dao.DoctorDao;
 import com.hospital.v1.domain.Doctor;
 import com.hospital.v1.domain.Horario;
 import com.hospital.v1.service.DoctorService;
+import com.hospital.v1.service.TelDoctorService;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class DoctorServiceImpl implements DoctorService {
     //Esto crea una unica copia de un objeto
     @Autowired
     private DoctorDao doctorDao;
+    
+    @Autowired
+    private TelDoctorService telService;
     
     @Override
     @Procedure(name = "Doctor.getDetails")
@@ -59,6 +63,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public void addDoctor(Long cedDoctor, String puesto, String nombre, String genero, Long idHorario) {
         doctorDao.agregarDoctor(cedDoctor, puesto, nombre, genero, idHorario);
+        
     }
 
     @Override

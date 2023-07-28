@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.hospital.v1.service.DoctorService;
 import com.hospital.v1.domain.Doctor;
+import com.hospital.v1.service.HorarioService;
+import com.hospital.v1.domain.TelDoctor;
+import com.hospital.v1.service.TelDoctorService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +27,21 @@ public class DoctorController {
     private DoctorService docService;
     
     @Autowired
+    private HorarioService horService;
+    
+    
+    @Autowired
     private HttpServletRequest request;
 
     @GetMapping("/")
     public String listAll(Model model) {
         var Doctores = docService.getDoctors();
+        var Horarios = horService.getHorarios();
+        model.addAttribute("activePage", "home");
         model.addAttribute("Doctores", Doctores);
+        model.addAttribute("Hors", Horarios);
+        
+        
         return "index";
     }
     
