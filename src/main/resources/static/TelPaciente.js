@@ -1,13 +1,13 @@
 
 
-function populateModalFields(idHorario, dias, horas) {
-    const idHorarioInput = document.getElementById("idHorario");
-    const diasInput = document.getElementById("dias");
-    const horasInput = document.getElementById("horas");
+function populateModalFields(idTelPaciente, cedPaciente, numTelefono) {
+    const idTelPacienteInput = document.getElementById("idTelPaciente");
+    const cedulaInput = document.getElementById("btn-cedPaciente");
+    const numTelefonoInput = document.getElementById("numTelefono");
 
-    idHorarioInput.value = idHorario;
-    diasInput.value = dias;
-    horasInput.value = horas;
+    idTelPacienteInput.value = idTelPaciente;
+    cedulaInput.value = cedPaciente;
+    numTelefonoInput.value = numTelefono;
 }
 
 function deleteModalField(idHorario){

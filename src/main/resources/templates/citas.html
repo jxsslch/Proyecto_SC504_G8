@@ -28,13 +28,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                     <div class="row mt-3">
                         <div class="col-lg-9">
-                            <h2 class="">Tel. Doctor Table</h2>
+                            <h2 class="">Citas</h2>
                         </div>
                         <div class="col">
-                            <button data-bs-toggle="modal" type="button" data-bs-target="#addTelDocModal" class="btn btn-success">
-                                <i class="fa fa-plus"></i><span> Añadir Tel. Doctor</span>
+                            <button data-bs-toggle="modal" type="button" data-bs-target="#addCitasModal" class="btn btn-success">
+                                <i class="fa fa-plus"></i><span> Añadir Citas</span>
                             </button>
-                            <button data-toggle="modal" type="button" data-bs-target="#deleteTelDocModal" class="btn btn-danger" >
+                            <button data-toggle="modal" type="button" data-bs-target="#deleteCitasModal" class="btn btn-danger" >
                                 <i class="fa fa-minus"></i><span> Borrar</span>
                             </button>	
 
@@ -44,23 +44,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>id Tel. Doctor</th>
-                                <th>Cédula</th>
-                                <th>Num. Teléfono</th>
+                                <th>Núm. Cita</th>
+                                <th>Motivo</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Paciente</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="tel : ${telDoctors}" th:id="${tel.idTelDoctor}">
-                                <td>[[${tel.idTelDoctor}]]</td>
-                                <td>[[${tel.cedDoctor}]]</td>
-                                <td>[[${tel.numTelefono}]]</td>
+                            <tr th:each="cita : ${Citas}" th:id="${cita.numCita}">
+                                <td>[[${cita.numCita}]]</td>
+                                <td>[[${cita.motivo}]]</td>
+                                <td>[[${cita.estado}]]</td>
+                                <td>[[${cita.fecha}]]</td>
+                                <td>[[${cita.hora}]]</td>
+                                <td>[[${cita.paciente.cedPaciente}]]</td>
+
                                 <td>
-                                    <a data-bs-toggle="modal" type="button" data-bs-target="#editTelDocModal" class="edit" 
-                                       th:attr="onclick=|populateModalFields('${tel.idTelDoctor}', '${tel.cedDoctor}', '${tel.numTelefono}')|">
+                                    <a data-bs-toggle="modal" type="button" data-bs-target="#editCitaModal" class="edit" 
+                                       th:attr="onclick=|populateModalFields('${cita.numCita}', '${cita.motivo}', '${cita.estado}', '${cita.fecha}', '${cita.hora}', '${cita.paciente.cedPaciente}')|">
                                         <i class="fa fa-edit" data-toggle="tooltip" title="Editar"></i>
                                     </a>
-                                    <a data-bs-toggle="modal" type="button" data-bs-target="#deleteTelDocModal" class="delete"
-                                       th:attr="onclick=|deleteModalField('${tel.idTelDoctor}')|">
+                                    <a data-bs-toggle="modal" type="button" data-bs-target="#deleteCitaModal" class="delete"
+                                       th:attr="onclick=|deleteModalField('${cita.numCita}')|">
                                         <i class="fa fa-trash" data-toggle="tooltip" title="Borrar"></i>
                                     </a>
                                 </td>
@@ -72,35 +80,55 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Add Modal HTML -->
         <section>
-            <div id="addTelDocModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addTelDocModal" aria-hidden="true">
+            <div id="addCitaModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addCitaModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/guardar}" th:object="${telDoc}" method="POST">
+                        <form th:action="@{/guardar}" th:object="${cita}" method="POST">
                             <div class="modal-header">						
-                                <h4 class="modal-title">Añadir Tel. Doctor</h4>
+                                <h4 class="modal-title">Añadir Cita</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                             </div>
-                            
+
                             <div class="modal-body">		
-                                 <div class="form-group">
-                                    <label for="idTelDoctor">Id. Tel. Doctor</label>
-                                    <input type="text" class="form-control" name="idTelDoctor" required>
+                                <div class="form-group">
+                                    <label for="numCita">Num cita</label>
+                                    <input type="text" class="form-control" name="numCita" required>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="cedDoctor">Cédula</label>
+                                    <label for="motivo">Motivo</label>
+                                    <input type="text" class="form-control" name="motivo" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="estado">Estado</label>
                                     <div class="form-group">
-                                        <select class="form-select" name="doctor.ceddoctor"  required>
-                                            <option th:each="doctor : ${Doctores}" th:text="${doctor.ceddoctor}" th:value="${doctor.ceddoctor}"></option>
+                                        <select class="form-select" name="estado" required>
+                                            <option  value="A">Activo</option>
+                                        </select>
+                                    </div>
+                                </div> 
+                                
+                                <div class="form-group">
+                                    <label for="fecha">Fecha</label>
+                                    <input type="date" class="form-control" name="fecha" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="hora">Hora</label>
+                                    <input type="text" class="form-control" name="hora" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cedPaciente">Cédula</label>
+                                    <div class="form-group">
+                                        <select class="form-select" name="paciente.cedPaciente"  required>
+                                            <option th:each="paciente : ${Pacientes}" th:text="${paciente.cedPaciente}" th:value="${paciente.cedPaciente}"></option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="numTelefono">Número télefono</label>
-                                    <input type="text" class="form-control" name="numTelefono" required>
-                                </div>
-                                
+
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
@@ -114,41 +142,54 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Edit Modal HTML -->
         <section>
-            <div id="editTelDocModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editTelDocModal" aria-hidden="true">
+            <div id="editCitasModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editCitasModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/actualizar}" th:object="${telDoc}" method="POST">
+                        <form th:action="@{/actualizar}" th:object="${citas}" method="POST">
                             <div class="modal-header">						
-                                <h4 class="modal-title">Editar Doctor</h4>
+                                <h4 class="modal-title">Editar Citas</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
-                                    <label for="ceddoctor">Cédula</label>
-                                    <input id="idTelDoctor" type="text" readonly class="form-control-plaintext" name="ceddoctor">
+                                    <label for="numCita">Num cita</label>
+                                    <input id="numCita" type="text" class="form-control" name="numCita" required>
                                 </div>
-
+                                
                                 <div class="form-group">
-                                    <label for="puesto">Puesto</label>
-                                    <input id="cedDoctor" type="text" class="form-control-plaintext" name="puesto" required>
+                                    <label for="motivo">Motivo</label>
+                                    <input id="motivo" type="text" class="form-control" name="motivo" required>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="nomdoctor">Nombre</label>
-                                    <input id="nombre" type="text" class="form-control" name="nomdoctor" required></input>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="genero">Genero</label>
+                                
+                               <div class="form-group">
+                                    <label for="estado">Estado</label>
                                     <div class="form-group">
-                                        <select id="btn-genero" class="form-select" name="genero" required>
-                                            <option  value="H">Hombre</option>
-                                            <option  value="M">Mujer</option>
+                                        <select class="form-select" name="estado" required>
+                                            <option value="A">Activo</option>
+                                            <option value="C">Cancelada</option>
                                         </select>
                                     </div>
                                 </div> 
-
                                 
+                                <div class="form-group">
+                                    <label for="fecha">Fecha</label>
+                                    <input id="fecha" type="date" class="form-control" name="fecha" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="hora">Hora</label>
+                                    <input id="hora" type="text" class="form-control" name="hora" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cedPaciente">Cédula</label>
+                                    <div class="form-group">
+                                        <select id="btn-cedPaciente" class="form-select" name="paciente.cedPaciente"  required>
+                                            <option th:each="paciente : ${Pacientes}" th:text="${paciente.cedPaciente}" th:value="${paciente.cedPaciente}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
@@ -163,13 +204,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Delete Modal HTML -->
         <section>
-            <div id="deleteTelDocModal" class="modal fade">
+            <div id="deleteTelPacModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/borrar}" th:object="${telDoc}" method="POST">
-                            <input id='hiddenCedula' type='hidden' name='ceddoctor'>
+                        <form th:action="@{/borrar}" th:object="${cita}" method="POST">
+                            <input id='hiddenCedula' type='hidden' name='numCita'>
                             <div class="modal-header">						
-                                <h4 class="modal-title">Borrar Doctor</h4>
+                                <h4 class="modal-title">Borrar Citas</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="close"></button>
                             </div>
                             <div class="modal-body">					
@@ -188,7 +229,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
 
 
-        <script th:src="@{../static/TelDoctor.js}" type="text/javascript"></script>
+        <script th:src="@{../static/Citas.js}" type="text/javascript"></script>
     </body>
 
 

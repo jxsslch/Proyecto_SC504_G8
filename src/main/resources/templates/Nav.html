@@ -16,7 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        
+
         <section th:fragment='asideNav'>
             <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark h-100" style="width:280px;">
                 <a th:href="@{/}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> 
@@ -40,10 +40,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <li class="nav-item">
                         <a th:href="@{/horario/}"  th:classappend="${activePage == 'horario' ? 'nav-link active' : 'nav-link text-white'}">Horario</a>
                     </li>
+                    <li class="nav-item">
+                        <a th:href="@{/paciente/}"  th:classappend="${activePage == 'paciente' ? 'nav-link active' : 'nav-link text-white'}">Paciente</a>
+                        <nav class="nav flex-column">
+                            <a class="nav-link ms-3 my-1"
+                               th:href='@{/telPaciente/}'
+                               th:classappend="${activePage == 'telPacs' ? 'active' : 'text-white'}">Tel. Paciente</a>
+                            <a class="nav-link ms-3 my-1"
+                               th:href='@{/expediente/}'
+                               th:classappend="${activePage == 'exped' ? 'active' : 'text-white'}">Expediente</a>
+                        </nav>
+                    </li>
+                     <li class="nav-item">
+                        <a th:href="@{/citas/}"  th:classappend="${activePage == 'cita' ? 'nav-link active' : 'nav-link text-white'}">Cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/tratamiento/}"  th:classappend="${activePage == 'trat' ? 'nav-link active' : 'nav-link text-white'}">Tratamiento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/medicamento/}"  th:classappend="${activePage == 'med' ? 'nav-link active' : 'nav-link text-white'}">Medicamentos</a>
+                    </li>
                 </ul>
             </div>
         </section>    
-            
+
 
 
 

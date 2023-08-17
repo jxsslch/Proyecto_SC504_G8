@@ -1,24 +1,21 @@
 
 
-function populateModalFields(ceddoctor, puesto, nomdoctor, genero, dias) {
-    const cedulaInput = document.getElementById("cedula");
-    const puestoInput = document.getElementById("puesto");
-    const nombreInput = document.getElementById("nombre");
-    const generoButton = document.getElementById("btn-genero");
-    const diasButton = document.getElementById("btn-dias");
+function populateModalFields(id, doctor, paciente, cita) {
+    const idInput = document.getElementById("idExpediente");
+    const doctorInput = document.getElementById("btn-cedDoctor");
+    const pacienteInput = document.getElementById("btn-cedPaciente");
+    const citaButton = document.getElementById("btn-numCita");
 
-    console.log(dias);
-    cedulaInput.value = ceddoctor;
-    puestoInput.value = puesto;
-    nombreInput.value = nomdoctor;
-    generoButton.value = genero;
-    diasButton.value = dias;
+    idInput.value = id;
+    doctorInput.value = doctor;
+    pacienteInput.value = paciente;
+    citaButton.value = cita;
 }
 
-function deleteModalField(ceddoctor){
+function deleteModalField(cedPaciente){
     const cedulaHiddenInput = document.getElementById("hiddenCedula");
     
-    console.log(ceddoctor);
-    cedulaHiddenInput.value = ceddoctor;
+    console.log(cedPaciente);
+    cedulaHiddenInput.value = cedPaciente;
 }
 

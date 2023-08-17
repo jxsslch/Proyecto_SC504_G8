@@ -28,13 +28,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                     <div class="row mt-3">
                         <div class="col-lg-9">
-                            <h2 class="">Doctor Table</h2>
+                            <h2 class="">Medicamento Table</h2>
                         </div>
                         <div class="col">
-                            <button data-bs-toggle="modal" type="button" data-bs-target="#addDoctorModal" class="btn btn-success">
-                                <i class="fa fa-plus"></i><span> Añadir Doctor</span>
+                            <button data-bs-toggle="modal" type="button" data-bs-target="#addMedModal" class="btn btn-success">
+                                <i class="fa fa-plus"></i><span> Añadir Medicamento</span>
                             </button>
-                            <button data-toggle="modal" type="button" data-bs-target="#deleteDoctorModal" class="btn btn-danger" >
+                            <button data-toggle="modal" type="button" data-bs-target="#deleteMedModal" class="btn btn-danger" >
                                 <i class="fa fa-minus"></i><span> Borrar</span>
                             </button>	
 
@@ -44,28 +44,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>CedDoctor</th>
-                                <th>Puesto</th>
-                                <th>NomDoctor</th>
-                                <th>Genero</th>
-                                <th>IdHorario</th>
-                                <th>Acciones</th>
+                                <th>Id. Medicamento</th>
+                                <th>Nombre</th>
+                                <th>Cant. Disponible</th>
+                                <th>Vencimiento</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="doctor : ${Doctores}" th:id="${doctor.ceddoctor}">
-                                <td><a th:href="@{/}+${doctor.ceddoctor}">[[${doctor.ceddoctor}]]</a></td>
-                                <td>[[${doctor.puesto}]]</td>
-                                <td>[[${doctor.nomdoctor}]]</td>
-                                <td>[[${doctor.genero}]]</td>
-                                <td th:text="${doctor.horario.idHorario} ?: 'Desconocido'"></td>
+                            <tr th:each="med : ${Medicamentos}" th:id="${med.idMedicamento}">
+                                <td><a th:href="@{/medicamento/}+${med.idMedicamento}">[[${med.idMedicamento}]]</a></td>
+                                <td>[[${med.nomMedicamento}]]</td>
+                                <td>[[${med.cantDisponible}]]</td>
+                                <td>[[${med.fechaVencimiento}]]</td>
                                 <td>
-                                    <a data-bs-toggle="modal" type="button" data-bs-target="#editDoctorModal" class="edit" 
-                                       th:attr="onclick=|populateModalFields('${doctor.ceddoctor}', '${doctor.puesto}', '${doctor.nomdoctor}', '${doctor.genero}', '${doctor.horario.idHorario}')|">
+                                    <a data-bs-toggle="modal" type="button" data-bs-target="#editMedModal" class="edit" 
+                                       th:attr="onclick=|populateModalFields('${med.idMedicamento}', '${med.nomMedicamento}', '${med.cantDisponible}', '${med.fechaVencimiento}')|">
                                         <i class="fa fa-edit" data-toggle="tooltip" title="Editar"></i>
                                     </a>
-                                    <a data-bs-toggle="modal" type="button" data-bs-target="#deleteDoctorModal" class="delete"
-                                       th:attr="onclick=|deleteModalField('${doctor.ceddoctor}')|">
+                                    <a data-bs-toggle="modal" type="button" data-bs-target="#deleteMedModal" class="delete"
+                                       th:attr="onclick=|deleteModalField('${med.idMedicamento}')|">
                                         <i class="fa fa-trash" data-toggle="tooltip" title="Borrar"></i>
                                     </a>
                                 </td>
@@ -79,47 +76,33 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Add Modal HTML -->
         <section>
-            <div id="addDoctorModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addDoctorModal" aria-hidden="true">
+            <div id="addMedModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addMedModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/guardar}" th:object="${doctor}" method="POST">
+                        <form th:action="@{/medicamento/guardar}" th:object="${med}" method="POST">
                             <div class="modal-header">						
-                                <h4 class="modal-title">Añadir Doctor</h4>
+                                <h4 class="modal-title">Añadir Medicamento</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
-                                    <label for="ceddoctor">Cédula</label>
-                                    <input type="text" class="form-control" name="ceddoctor" required>
+                                    <label for="idMedicamento">Id. Medicamento</label>
+                                    <input type="text" class="form-control" name="idMedicamento" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="puesto">Puesto</label>
-                                    <input type="text" class="form-control" name="puesto" required>
+                                    <label for="nomMedicamento">Nombre</label>
+                                    <input type="text" class="form-control" name="nomMedicamento" required>
                                 </div>
-
+                                
                                 <div class="form-group">
-                                    <label for="nomdoctor">Nombre</label>
-                                    <input type="text" class="form-control" name="nomdoctor" required></input>
+                                    <label for="cantDisponible">Cant. Disponible</label>
+                                    <input type="text" class="form-control" name="cantDisponible" required></input>
                                 </div>
-
+                                
                                 <div class="form-group">
-                                    <label for="genero">Genero</label>
-                                    <div class="form-group">
-                                        <select class="form-select" name="genero" required>
-                                            <option  value="H">Hombre</option>
-                                            <option  value="M">Mujer</option>
-                                        </select>
-                                    </div>
-                                </div> 
-
-                                <div class="form-group">
-                                    <label for="idHorario">Horario</label>
-                                    <div class="form-group">
-                                        <select class="form-select" name="horario.idHorario"  required>
-                                            <option th:each='hor : ${Hors}' th:text="${hor.dias}" th:value="${hor.dias}"></option>
-                                        </select>
-                                    </div>
+                                    <label for="fechaVencimiento">Fecha vencimiento</label>
+                                    <input type="date" class="form-control" name="fechaVencimiento" required></input>
                                 </div>
                                 
                                 
@@ -136,49 +119,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Edit Modal HTML -->
         <section>
-            <div id="editDoctorModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editDoctorModal" aria-hidden="true">
+            <div id="editPacienteModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editPacienteModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/actualizar}" th:object="${doctor}" method="POST">
+                        <form th:action="@{/paciente/actualizar}" th:object="${paciente}" method="POST">
                             <div class="modal-header">						
-                                <h4 class="modal-title">Editar Doctor</h4>
+                                <h4 class="modal-title">Editar Paciente</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                             </div>
                             <div class="modal-body">					
-                                <div class="form-group">
-                                    <label for="ceddoctor">Cédula</label>
-                                    <input id="cedula" type="text" readonly class="form-control-plaintext" name="ceddoctor">
+                               <div class="form-group">
+                                    <label for="idMedicamento">Id. Medicamento</label>
+                                    <input id="id" type="text" class="form-control" name="idMedicamento" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="puesto">Puesto</label>
-                                    <input id="puesto" type="text" class="form-control" name="puesto" required>
+                                    <label for="nomMedicamento">Nombre</label>
+                                    <input id="nomMedicamento" type="text" class="form-control" name="nomMedicamento" required>
                                 </div>
-
+                                
                                 <div class="form-group">
-                                    <label for="nomdoctor">Nombre</label>
-                                    <input id="nombre" type="text" class="form-control" name="nomdoctor" required></input>
+                                    <label for="cantDisponible">Cant. Disponible</label>
+                                    <input id="cantDisponible" type="text" class="form-control" name="cantDisponible" required></input>
                                 </div>
-
+                                
                                 <div class="form-group">
-                                    <label for="genero">Genero</label>
-                                    <div class="form-group">
-                                        <select id="btn-genero" class="form-select" name="genero" required>
-                                            <option  value="H">Hombre</option>
-                                            <option  value="M">Mujer</option>
-                                        </select>
-                                    </div>
-                                </div> 
-
-                                <div class="form-group">
-                                    <label for="idHorario">Horario</label>
-                                    <div class="form-group">
-                                        <select id="btn-dias" class="form-select" name="horario.idHorario"  required>
-                                            <option th:each='doctor : ${Doctores}' th:text="${doctor.horario.dias}" th:value="${doctor.horario.idHorario}"></option>
-                                        </select>
-                                    </div>
+                                    <label for="fechaVencimiento">Fecha vencimiento</label>
+                                    <input id="date" type="date" class="form-control" name="fechaVencimiento" required></input>
                                 </div>
-                            </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
                                 <input type="submit" class="btn btn-success" value="Update">
@@ -192,13 +160,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Delete Modal HTML -->
         <section>
-            <div id="deleteDoctorModal" class="modal fade">
+            <div id="deletePacienteModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/borrar}" th:object="${doctor}" method="POST">
-                            <input id='hiddenCedula' type='hidden' name='ceddoctor'>
+                        <form th:action="@{/medicamento/borrar}" th:object="${med}" method="POST">
+                            <input id='hiddenCedula' type='hidden' name='idMedicamento'>
                             <div class="modal-header">						
-                                <h4 class="modal-title">Borrar Doctor</h4>
+                                <h4 class="modal-title">Borrar Medicamento</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="close"></button>
                             </div>
                             <div class="modal-body">					
@@ -217,7 +185,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
 
 
-        <script th:src="@{../static/Doctor.js}" type="text/javascript"></script>
+        <script th:src="@{../static/Paciente.js}" type="text/javascript"></script>
     </body>
 
 
