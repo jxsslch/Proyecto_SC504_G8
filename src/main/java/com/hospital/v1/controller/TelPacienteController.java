@@ -6,55 +6,56 @@ package com.hospital.v1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.hospital.v1.service.TelDoctorService;
+import com.hospital.v1.service.TelPacienteService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.hospital.v1.domain.TelDoctor;
-import com.hospital.v1.service.DoctorService;
+import com.hospital.v1.domain.TelPaciente;
+import com.hospital.v1.service.PacienteService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-@RequestMapping("/telDoctor")
-public class TelDoctorController {
+@RequestMapping("/telPaciente")
+public class TelPacienteController {
 
     @Autowired
-    private TelDoctorService telDocService;
+    private TelPacienteService telPacService;
     
     @Autowired
-    private DoctorService docService;
+    private PacienteService pacService;
 
     @GetMapping("/")
     public String inicio(Model model) {
-        var TelDoctors = telDocService.getTelDoctorDetails();
-        var Doctores = docService.getDoctors();
-        model.addAttribute("activePage", "telDocs");
-        model.addAttribute("telDoctors", TelDoctors);
-        model.addAttribute("Doctores", Doctores);
-        return "tel_doctor";
+        var TelPacientes = telPacService.getTelPacienteDetails();
+        var Pacientes = pacService.getPacientes();
+        System.out.println(TelPacientes.get(0).getNumTelefono());
+        model.addAttribute("activePage", "telPacs");
+        model.addAttribute("telPacientes", TelPacientes);
+        model.addAttribute("Pacientes", Pacientes);
+        return "tel_paciente";
     }   
 
     @PostMapping("/guardar")
-    public String guardarTelDoctor(@ModelAttribute TelDoctor telDoc) {
-        System.out.println(telDocService.insertTelDoctor(telDoc.getIdTelDoctor(),telDoc.getDoctor().getCeddoctor() , telDoc.getNumTelefono()));
-        return "redirect:/telDoctor/";
+    public String guardarTelPaciente(@ModelAttribute TelPaciente telPac) {
+        System.out.println(telPacService.insertTelPaciente(telPac.getIdTelPaciente(),telPac.getPaciente().getCedPaciente() , telPac.getNumTelefono()));
+        return "redirect:/telPaciente/";
     }
 
     
     @PostMapping("/actualizar")
-    public String actualizarDoctor(@ModelAttribute TelDoctor telDoc){
-        telDocService.updateTelDoctor(telDoc.getIdTelDoctor(), 
-                telDoc.getNumTelefono());
-        return "redirect:/telDoctor/";
+    public String actualizarPaciente(@ModelAttribute TelPaciente telPac){
+        telPacService.updateTelPaciente(telPac.getIdTelPaciente(), 
+                telPac.getNumTelefono());
+        return "redirect:/telPaciente/";
     }
     
 
     @PostMapping("/borrar")
-    public String borrarDoctor(@ModelAttribute TelDoctor telDocario) {
-        telDocService.deleteTelDoctor(telDocario.getIdTelDoctor());
-        return "redirect:/telDocario/";
+    public String borrarPaciente(@ModelAttribute TelPaciente telPacario) {
+        telPacService.deleteTelPaciente(telPacario.getIdTelPaciente());
+        return "redirect:/telPacario/";
     }
 
 }

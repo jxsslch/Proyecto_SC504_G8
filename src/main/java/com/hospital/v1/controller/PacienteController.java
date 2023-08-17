@@ -7,12 +7,9 @@ package com.hospital.v1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.hospital.v1.service.DoctorService;
-import com.hospital.v1.domain.Doctor;
-import com.hospital.v1.service.HorarioService;
-import com.hospital.v1.domain.TelDoctor;
-import com.hospital.v1.service.TelDoctorService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.hospital.v1.service.PacienteService;
+import com.hospital.v1.domain.Paciente;
+import com.hospital.v1.service.PacienteNacionalidadService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,71 +18,59 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class DoctorController {
+@RequestMapping("/paciente")
+public class PacienteController {
 
     @Autowired
-    private DoctorService docService;
+    private PacienteService pacService;
     
     @Autowired
-    private HorarioService horService;
-    
-    
-    @Autowired
-    private HttpServletRequest request;
+    private PacienteNacionalidadService pacNacService;
 
     @GetMapping("/")
     public String listAll(Model model) {
-        var Doctores = docService.getDoctors();
-        var Horarios = horService.getHorarios();
-        model.addAttribute("activePage", "home");
-        model.addAttribute("Doctores", Doctores);
-        model.addAttribute("Hors", Horarios);
-        
-        
-        return "index";
+        var Pacientes = pacService.getPacientes();
+        var PacNac = pacNacService.getPacientes();
+        model.addAttribute("activePage", "paciente");
+        model.addAttribute("Pacientes", Pacientes);
+        return "paciente";
     }
     
-    @RequestMapping("/{ceddoctor}")
-    public String getDoctorDetails(@PathVariable("ceddoctor") Long cedDoctor, Model model){
-//        System.out.println(request.getRequestURI().substring(request.getRequestURI().indexOf('/')).endsWith("/"));
-        var Doc = docService.getDoctorByCedDoctor(cedDoctor);
+    @RequestMapping("/{cedPaciente}")
+    public String getPacienteDetails(@PathVariable("cedPaciente") Long cedPaciente, Model model){
+        var Pac = pacService.getPacienteByCedPaciente(cedPaciente);
         
-        System.out.println(Doc.getCeddoctor());
-        model.addAttribute("Doctores",Doc);
-        return "index";
+        System.out.println(Pac.getCedPaciente());
+        model.addAttribute("Pacientes",Pac);
+        return "paciente";
     }
     
     @PostMapping("/guardar")
-    public String guardarDoctor(@ModelAttribute Doctor doctor){
-        docService.addDoctor(doctor.getCeddoctor(), 
-                doctor.getPuesto(), 
-                doctor.getNomdoctor(), 
-                doctor.getGenero(), 
-                doctor.getHorario().getIdHorario());
-        return "redirect:/";
+    public String guardarPaciente(@ModelAttribute Paciente paciente){
+        pacService.addPaciente(paciente.getCedPaciente(),
+                paciente.getNomPaciente(),
+                paciente.getFechaNacimiento(),
+                paciente.getEdad(),
+                paciente.getGenero());
+        return "redirect:/paciente/";
     }
 
     
     @PostMapping("/actualizar")
-    public String actualizarDoctor(@ModelAttribute Doctor doctor){
-        docService.updateDoctor(doctor.getCeddoctor(), 
-                doctor.getPuesto(), 
-                doctor.getNomdoctor(), 
-                doctor.getGenero(), 
-                doctor.getHorario().getIdHorario());
-        return "redirect:/";
+    public String actualizarPaciente(@ModelAttribute Paciente paciente){
+        System.out.println(paciente.getNomPaciente());
+        pacService.updatePaciente(paciente.getCedPaciente(),
+                paciente.getNomPaciente(),
+                paciente.getFechaNacimiento(),
+                paciente.getEdad(),
+                paciente.getGenero());
+        return "redirect:/paciente/";
     }
     
     @PostMapping("/borrar")
-    public String borrarDoctor(@ModelAttribute Doctor doctor){
-        docService.deleteDoctor(doctor.getCeddoctor());
-        return "redirect:/";
-    }
-    
-    
-    @ModelAttribute("requestURI")
-    public String getContextPath() {
-        return request.getRequestURI().substring(request.getRequestURI().indexOf('/'));
+    public String borrarPaciente(@ModelAttribute Paciente paciente){
+        pacService.deletePaciente(paciente.getCedPaciente());
+        return "redirect:/paciente/";
     }
 }
 

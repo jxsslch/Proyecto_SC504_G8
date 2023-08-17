@@ -1,30 +1,30 @@
 
 package com.hospital.v1.service;
 
-import com.hospital.v1.domain.Doctor;
+import com.hospital.v1.domain.Paciente;
+import java.sql.Date;
 import java.util.List;
-import java.util.HashMap;
 
-public interface DoctorService {
-    public Doctor getDoctorDetails(Long cedDoctor);
+public interface PacienteService {
+//    public Paciente getPacienteDetails(Long cedPaciente);
+//    
+//    public Paciente convertToPaciente(List<HashMap<String, Object>> map);
     
-    public Doctor convertToDoctor(List<HashMap<String, Object>> map);
+    public Paciente getPacienteByCedPaciente(Long cedPaciente);
     
-    public Doctor getDoctorByCedDoctor(Long cedDoctor);
+    public List<Paciente> getPacientes();
     
-    public List<Doctor> getDoctors();
-    
-    public void addDoctor( Long cedDoctor, 
-            String puesto,
+    public void addPaciente( Long cedPaciente,
             String nombre,
-            String genero,
-            Long idHorario);
+            Date fechaNacimiento,
+            Integer edad,
+            char genero);
     
-    public void updateDoctor( Long cedDoctor, 
-            String puesto,
+    public void updatePaciente(Long cedPaciente,
             String nombre,
-            String genero,
-            Long idHorario);
+            Date fechaNacimiento,
+            Integer edad,
+            char genero);
     
-    public void deleteDoctor(Long cedDoctor);
+    public void deletePaciente(Long cedPaciente);
 }

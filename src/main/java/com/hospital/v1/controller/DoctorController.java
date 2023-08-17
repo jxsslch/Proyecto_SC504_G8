@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import com.hospital.v1.service.DoctorService;
 import com.hospital.v1.domain.Doctor;
 import com.hospital.v1.service.HorarioService;
-import com.hospital.v1.domain.TelDoctor;
-import com.hospital.v1.service.TelDoctorService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

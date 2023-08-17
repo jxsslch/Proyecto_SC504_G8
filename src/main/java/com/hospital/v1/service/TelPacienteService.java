@@ -4,17 +4,17 @@
  */
 package com.hospital.v1.service;
 
-import com.hospital.v1.domain.TelDoctorDetails;
+import com.hospital.v1.domain.TelPacienteDetails;
 import java.util.List;
 
 
-public interface TelDoctorService {
+public interface TelPacienteService {
     
-    public List<TelDoctorDetails> getTelDoctorDetails();
+    public List<TelPacienteDetails> getTelPacienteDetails();
 
-    public String insertTelDoctor(Integer idTelDoctor, Long cedDoctor, Integer numTelefono);
+    public String insertTelPaciente(Integer idTelPaciente, Long cedPaciente, Integer numTelefono);
 
-    public String updateTelDoctor(Integer idTelDoctor, Integer numTelefono);
+    public String updateTelPaciente(Integer idTelPaciente, Integer numTelefono);
 
-    public String deleteTelDoctor(Integer idTelDoctor);
+    public String deleteTelPaciente(Integer idTelPaciente);
 }

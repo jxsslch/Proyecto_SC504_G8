@@ -4,9 +4,9 @@
  */
 package com.hospital.v1.service.impl;
 
-import com.hospital.v1.dao.TelDoctorDao;
-import com.hospital.v1.domain.TelDoctorDetails;
-import com.hospital.v1.service.TelDoctorService;
+import com.hospital.v1.dao.TelPacienteDao;
+import com.hospital.v1.domain.TelPacienteDetails;
+import com.hospital.v1.service.TelPacienteService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
@@ -17,42 +17,42 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class TelDoctorServiceImpl implements TelDoctorService {
+public class TelPacienteServiceImpl implements TelPacienteService {
     
     @Autowired
-    private TelDoctorDao telDoctorDao;
+    private TelPacienteDao telPacienteDao;
     
     @Autowired
     private EntityManager entityManager;
 
-    public List<TelDoctorDetails> getTelDoctorDetails() {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("get_telDoctor_details");
+    public List<TelPacienteDetails> getTelPacienteDetails() {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("get_telPaciente_details");
     query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
     query.execute();
 
     List<Object[]> resultSet = query.getResultList();
-    List<TelDoctorDetails> telDoctorDetailsList = new ArrayList<>();
+    List<TelPacienteDetails> telPacienteDetailsList = new ArrayList<>();
 
     for (Object[] result : resultSet) {
-        TelDoctorDetails telDoctorDetails = new TelDoctorDetails();
-        telDoctorDetails.setIdTelDoctor((Integer) result[0]);
-        telDoctorDetails.setCedDoctor((Integer) result[1]);
-        telDoctorDetails.setNumTelefono((Integer) result[2]);
-        telDoctorDetailsList.add(telDoctorDetails);
+        TelPacienteDetails telPacienteDetails = new TelPacienteDetails();
+        telPacienteDetails.setIdTelPaciente((Integer) result[0]);
+        telPacienteDetails.setCedPaciente((Integer) result[1]);
+        telPacienteDetails.setNumTelefono((Integer) result[2]);
+        telPacienteDetailsList.add(telPacienteDetails);
     }
 
-    return telDoctorDetailsList;
+    return telPacienteDetailsList;
     }
 
-    public String insertTelDoctor(Integer idTelDoctor, Long cedDoctor, Integer numTelefono) {
-        return telDoctorDao.insertTelDoctor(idTelDoctor, cedDoctor, numTelefono);
+    public String insertTelPaciente(Integer idTelPaciente, Long cedPaciente, Integer numTelefono) {
+        return telPacienteDao.insertTelPaciente(idTelPaciente, cedPaciente, numTelefono);
     }
 
-    public String updateTelDoctor(Integer idTelDoctor, Integer numTelefono) {
-        return telDoctorDao.updateTelDoctor(idTelDoctor, numTelefono);
+    public String updateTelPaciente(Integer idTelPaciente, Integer numTelefono) {
+        return telPacienteDao.updateTelPaciente(idTelPaciente, numTelefono);
     }
 
-    public String deleteTelDoctor(Integer idTelDoctor) {
-        return telDoctorDao.deleteTelDoctor(idTelDoctor);
+    public String deleteTelPaciente(Integer idTelPaciente) {
+        return telPacienteDao.deleteTelPaciente(idTelPaciente);
     }
 }
