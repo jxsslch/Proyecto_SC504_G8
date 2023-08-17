@@ -78,8 +78,6 @@ public class TelDoctor {
     
      public TelDoctor(TelDoctorDetails telDoctorDetails) {
         this.idTelDoctor = telDoctorDetails.getIdTelDoctor();
-        // You may need to adjust the mapping for the Doctor reference if necessary
-        // this.doctor = ...; 
         this.numTelefono = telDoctorDetails.getNumTelefono();
     }
     

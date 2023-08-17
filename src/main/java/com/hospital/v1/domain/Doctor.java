@@ -16,7 +16,7 @@ import lombok.Setter;
         name = "Doctor.getDetails",
         procedureName = "get_doctor_details",
         parameters = {
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cedDoctor", type = Long.class),
+            @StoredProcedureParameter(mode = ParameterMode.INOUT, name = "p_cedDoctor", type = Long.class),
             @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_puesto", type = String.class),
             @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_nomDoctor", type = String.class),
             @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_genero", type = String.class),
@@ -37,7 +37,7 @@ import lombok.Setter;
     procedureName = "doctor_package.TraerDoctor",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cedDoctor", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "v_doctor", type = void.class)
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "v_doctor", type = void.class)
     },
     resultClasses = { Doctor.class }
 )

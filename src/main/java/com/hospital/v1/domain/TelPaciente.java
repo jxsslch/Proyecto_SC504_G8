@@ -23,34 +23,34 @@ import lombok.Setter;
 
 @NamedStoredProcedureQueries({
     @NamedStoredProcedureQuery(
-        name = "get_telDoctor_details",
-        procedureName = "get_telDoctor_details",
-        resultClasses = {TelDoctor.class}
+        name = "get_telPaciente_details",
+        procedureName = "get_telPaciente_details",
+        resultClasses = {TelPaciente.class}
     ),
     @NamedStoredProcedureQuery(
-        name = "insert_telDoctor",
-        procedureName = "insert_telDoctor",
+        name = "insert_telPaciente",
+        procedureName = "insert_telPaciente",
         parameters = {
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idTelDoctor", type = Long.class),
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cedDoctor", type = Long.class),
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idTelPaciente", type = Long.class),
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cedPaciente", type = Long.class),
             @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_numTelefono", type = Long.class),
             @StoredProcedureParameter(mode = ParameterMode.OUT, name = "mensaje", type = String.class)
         }
     ),
     @NamedStoredProcedureQuery(
-        name = "update_telDoctor",
-        procedureName = "update_telDoctor",
+        name = "update_telPaciente",
+        procedureName = "update_telPaciente",
         parameters = {
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idTelDoctor", type = Long.class),
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idTelPaciente", type = Long.class),
             @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_numTelefono", type = Long.class),
             @StoredProcedureParameter(mode = ParameterMode.OUT, name = "mensaje", type = String.class)
         }
     ),
     @NamedStoredProcedureQuery(
-        name = "delete_telDoctor",
-        procedureName = "delete_telDoctor",
+        name = "delete_telPaciente",
+        procedureName = "delete_telPaciente",
         parameters = {
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idTelDoctor", type = Long.class),
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idTelPaciente", type = Long.class),
             @StoredProcedureParameter(mode = ParameterMode.OUT, name = "mensaje", type = String.class)
         }
     )
@@ -60,27 +60,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "telDoctor")
-public class TelDoctor {
+@Table(name = "telPaciente")
+public class TelPaciente {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDTELDOCTOR")
-    private Integer idTelDoctor;
+    @Column(name = "IDTELPACIENTE")
+    private Integer idTelPaciente;
     
     @Column(name = "NUMTELEFONO")
     private Integer numTelefono;
     
     @ManyToOne
-    @JoinColumn(name = "cedDoctor", referencedColumnName = "cedDoctor", updatable = false)
-    private Doctor doctor;
+    @JoinColumn(name = "cedPaciente", referencedColumnName = "cedPaciente", updatable = false)
+    private Paciente paciente;
     
     
-     public TelDoctor(TelDoctorDetails telDoctorDetails) {
-        this.idTelDoctor = telDoctorDetails.getIdTelDoctor();
-        // You may need to adjust the mapping for the Doctor reference if necessary
-        // this.doctor = ...; 
-        this.numTelefono = telDoctorDetails.getNumTelefono();
+     public TelPaciente(TelPacienteDetails telPacienteDetails) {
+        this.idTelPaciente = telPacienteDetails.getIdTelPaciente();
+        this.numTelefono = telPacienteDetails.getNumTelefono();
     }
     
 }

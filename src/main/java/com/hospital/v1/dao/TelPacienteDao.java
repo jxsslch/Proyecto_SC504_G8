@@ -4,23 +4,23 @@
  */
 package com.hospital.v1.dao;
 
-import com.hospital.v1.domain.TelDoctor;
-import com.hospital.v1.domain.TelDoctorDetails;
+import com.hospital.v1.domain.TelPaciente;
+import com.hospital.v1.domain.TelPacienteDetails;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 
 
-public interface TelDoctorDao extends JpaRepository<TelDoctor, Long> {
-    @Procedure(name = "get_telDoctor_details")
-    List<TelDoctorDetails> getTelDoctorDetails();
+public interface TelPacienteDao extends JpaRepository<TelPaciente, Long> {
+    @Procedure(name = "get_telPaciente_details")
+    List<TelPacienteDetails> getTelPacienteDetails();
 
-    @Procedure(name = "insert_telDoctor")
-    String insertTelDoctor(Integer p_idTelDoctor, Long p_cedDoctor, Integer p_numTelefono);
+    @Procedure(name = "insert_telPaciente")
+    String insertTelPaciente(Integer p_idTelPaciente, Long p_cedPaciente, Integer p_numTelefono);
 
-    @Procedure(name = "update_telDoctor")
-    String updateTelDoctor(Integer p_idTelDoctor, Integer p_numTelefono);
+    @Procedure(name = "update_telPaciente")
+    String updateTelPaciente(Integer p_idTelPaciente, Integer p_numTelefono);
 
-    @Procedure(name = "delete_telDoctor")
-    String deleteTelDoctor(Integer p_idTelDoctor);
+    @Procedure(name = "delete_telPaciente")
+    String deleteTelPaciente(Integer p_idTelPaciente);
 }

@@ -14,9 +14,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelDoctorDetails {
-    private Integer idTelDoctor;
-    private Integer cedDoctor;
+public class TelPacienteDetails {
+    private Integer idTelPaciente;
+    private Integer cedPaciente;
     private Integer numTelefono;
     
     
