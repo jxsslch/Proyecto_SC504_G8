@@ -13,4 +13,12 @@ import org.springframework.data.jpa.repository.query.Procedure;
 public interface ExpedienteDao extends JpaRepository<Expediente, Integer> {
     @Procedure(name = "Expedientes.getExpedientes")
     public List<Expediente> getExpedientes();
+    
+    @Procedure(name = "insert_expediente")
+    String insertExpedienteProcedure(
+        Integer p_idExpediente,
+        Long p_cedDoctor,
+        Long p_cedPaciente,
+        Integer p_numCita
+    );
 }

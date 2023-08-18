@@ -26,13 +26,13 @@ public class CitasServiceImpl implements CitasService {
     }
 
     @Override
-    public String insertarCitas(Integer numCita, String motivo, String estado, Date fecha, String hora, Integer cedPaciente) {
+    public String insertarCitas(Integer numCita, String motivo, String estado, Date fecha, String hora, Long cedPaciente) {
         return citasDao.insertCitas(numCita, motivo, estado, fecha, hora, cedPaciente);
     
     }
 
     @Override
-    public String actualizarCitas(Integer numCita, String motivo, String estado, Date fecha, String hora, Integer cedPaciente) {
+    public String actualizarCitas(Integer numCita, String motivo, String estado, Date fecha, String hora, Long cedPaciente) {
         return citasDao.updateCitas(numCita, motivo, estado, fecha, hora, cedPaciente);
     }
     

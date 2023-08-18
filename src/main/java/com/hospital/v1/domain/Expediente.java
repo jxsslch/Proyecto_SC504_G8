@@ -33,6 +33,17 @@ import lombok.Setter;
     },
     resultClasses = Expediente.class
 )
+@NamedStoredProcedureQuery(
+    name = "Expediente.insertExpediente",
+    procedureName = "insert_expediente",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idExpediente", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cedDoctor", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cedPaciente", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_numCita", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "mensaje", type = String.class)
+    }
+)
 @Getter
 @Setter
 @NoArgsConstructor

@@ -32,6 +32,25 @@ import lombok.Setter;
     },
     resultClasses = Tratamiento.class
 )
+@NamedStoredProcedureQuery(
+    name = "Tratamiento.TraerTratamiento",
+    procedureName = "expediente_tratamiento_package.TraerExpTrat",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idExpTrat", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "v_tratamiento", type = void.class)
+    },
+    resultClasses = { Tratamiento.class }
+)
+@NamedStoredProcedureQuery(
+    name = "Tratamiento.AgregarTratamiento",
+    procedureName = "expediente_tratamiento_package.AgregarExpTrat",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idExpTrat", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idTratamiento", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_idExpediente", type = Integer.class)
+    }
+)
+
 @Getter
 @Setter
 @NoArgsConstructor

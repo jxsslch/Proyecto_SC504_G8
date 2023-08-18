@@ -46,9 +46,10 @@ public class DoctorController {
     @RequestMapping("/{ceddoctor}")
     public String getDoctorDetails(@PathVariable("ceddoctor") Long cedDoctor, Model model){
 //        System.out.println(request.getRequestURI().substring(request.getRequestURI().indexOf('/')).endsWith("/"));
+
+        model.addAttribute("activePage", "home");
         var Doc = docService.getDoctorByCedDoctor(cedDoctor);
         
-        System.out.println(Doc.getCeddoctor());
         model.addAttribute("Doctores",Doc);
         return "index";
     }

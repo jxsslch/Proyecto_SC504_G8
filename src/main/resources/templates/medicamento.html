@@ -119,10 +119,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Edit Modal HTML -->
         <section>
-            <div id="editPacienteModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editPacienteModal" aria-hidden="true">
+            <div id="editMedModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editMedModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/paciente/actualizar}" th:object="${paciente}" method="POST">
+                        <form th:action="@{/medicamento/actualizar}" th:object="${paciente}" method="POST">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Editar Paciente</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -130,7 +130,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <div class="modal-body">					
                                <div class="form-group">
                                     <label for="idMedicamento">Id. Medicamento</label>
-                                    <input id="id" type="text" class="form-control" name="idMedicamento" required>
+                                    <input id="idMedicamento" type="text" class="form-control" name="idMedicamento" required>
                                 </div>
 
                                 <div class="form-group">
@@ -160,7 +160,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Delete Modal HTML -->
         <section>
-            <div id="deletePacienteModal" class="modal fade">
+            <div id="deleteMedeModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form th:action="@{/medicamento/borrar}" th:object="${med}" method="POST">
@@ -185,7 +185,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
 
 
-        <script th:src="@{../static/Paciente.js}" type="text/javascript"></script>
+        <script th:src="@{../static/Medicamento.js}" type="text/javascript"></script>
     </body>
 
 

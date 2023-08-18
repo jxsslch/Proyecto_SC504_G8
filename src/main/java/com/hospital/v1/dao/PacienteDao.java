@@ -17,7 +17,7 @@ public interface PacienteDao extends JpaRepository<Paciente, Long> {
     @Procedure(name = "Paciente.getPacientes")
     List<Paciente> getPacientes();
     
-    @Procedure(name = "TraerPaciente", outputParameterName = "v_paciente")
+    @Procedure(name = "Paciente.getPacienteByCed")
     Paciente traerPaciente(@Param("p_cedPaciente") Long cedPaciente);
     
     @Procedure(name = "AgregarPaciente")

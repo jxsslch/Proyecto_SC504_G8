@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.hospital.v1.domain.TelPaciente;
+import com.hospital.v1.domain.Citas;
 import com.hospital.v1.service.CitasService;
 import com.hospital.v1.service.DoctorService;
 import com.hospital.v1.service.PacienteService;
@@ -38,25 +38,20 @@ public class CitasController {
         return "citas";
     }   
 
-//    @PostMapping("/guardar")
-//    public String guardarTelPaciente(@ModelAttribute TelPaciente telPac) {
-//        System.out.println(telPacService.insertTelPaciente(telPac.getIdTelPaciente(),telPac.getPaciente().getCedPaciente() , telPac.getNumTelefono()));
-//        return "redirect:/telPaciente/";
-//    }
-//
-//    
-//    @PostMapping("/actualizar")
-//    public String actualizarPaciente(@ModelAttribute TelPaciente telPac){
-//        telPacService.updateTelPaciente(telPac.getIdTelPaciente(), 
-//                telPac.getNumTelefono());
-//        return "redirect:/telPaciente/";
-//    }
-//    
-//
-//    @PostMapping("/borrar")
-//    public String borrarPaciente(@ModelAttribute TelPaciente telPacario) {
-//        telPacService.deleteTelPaciente(telPacario.getIdTelPaciente());
-//        return "redirect:/telPacario/";
-//    }
+    @PostMapping("/guardar")
+    public String guardarCita(@ModelAttribute Citas cita) {
+        System.out.println(citaService.insertarCitas(cita.getNumCita(), cita.getMotivo(), cita.getMotivo(), cita.getFecha(), cita.getHora(), cita.getPaciente().getCedPaciente()));
+        return "redirect:/citas/";
+    }
+
+    
+    @PostMapping("/actualizar")
+    public String actualizarCitas(@ModelAttribute Citas cita){
+        citaService.actualizarCitas(cita.getNumCita(), cita.getMotivo(), cita.getMotivo(), cita.getFecha(), cita.getHora(), cita.getPaciente().getCedPaciente());
+        return "redirect:/telPaciente/";
+    }
+    
+
+
 
 }

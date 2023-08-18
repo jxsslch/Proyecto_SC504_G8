@@ -42,10 +42,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </li>
                     <li class="nav-item">
                         <a th:href="@{/paciente/}"  th:classappend="${activePage == 'paciente' ? 'nav-link active' : 'nav-link text-white'}">Paciente</a>
-                        <nav class="nav flex-column">
+                        <nav class="nav flex-column" th:switch="${activePage}">
                             <a class="nav-link ms-3 my-1"
                                th:href='@{/telPaciente/}'
-                               th:classappend="${activePage == 'telPacs' ? 'active' : 'text-white'}">Tel. Paciente</a>
+                               th:classappend="${activePage == 'telPacs' ? 'active' : 'text-white'}"
+                               >Tel. Paciente</a>
                             <a class="nav-link ms-3 my-1"
                                th:href='@{/expediente/}'
                                th:classappend="${activePage == 'exped' ? 'active' : 'text-white'}">Expediente</a>

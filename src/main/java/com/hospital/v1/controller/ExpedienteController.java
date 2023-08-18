@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.hospital.v1.domain.TelPaciente;
+import com.hospital.v1.domain.Expediente;
 import com.hospital.v1.service.CitasService;
 import com.hospital.v1.service.DoctorService;
 import com.hospital.v1.service.PacienteService;
@@ -48,11 +48,11 @@ public class ExpedienteController {
         return "expediente";
     }   
 
-//    @PostMapping("/guardar")
-//    public String guardarTelPaciente(@ModelAttribute TelPaciente telPac) {
-//        System.out.println(telPacService.insertTelPaciente(telPac.getIdTelPaciente(),telPac.getPaciente().getCedPaciente() , telPac.getNumTelefono()));
-//        return "redirect:/telPaciente/";
-//    }
+    @PostMapping("/guardar")
+    public String guardarExpediente(@ModelAttribute Expediente exped) {
+        expedService.insertExpedienteProcedure(exped.getIdExpediente(), exped.getDoctor().getCeddoctor(), exped.getPaciente().getCedPaciente(), exped.getCitas().getNumCita());
+        return "redirect:/expediente/";
+    }
 //
 //    
 //    @PostMapping("/actualizar")

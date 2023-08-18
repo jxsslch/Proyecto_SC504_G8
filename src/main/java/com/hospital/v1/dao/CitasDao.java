@@ -23,7 +23,7 @@ public interface CitasDao extends JpaRepository<Citas, Integer> {
         @Param("p_estado") String estado,
         @Param("p_fecha") Date fecha,
         @Param("p_hora") String hora,
-        @Param("p_cedPaciente") Integer cedPaciente
+        @Param("p_cedPaciente") Long cedPaciente
     );
 
     @Procedure(name = "updateCitas")
@@ -33,6 +33,6 @@ public interface CitasDao extends JpaRepository<Citas, Integer> {
         @Param("p_estado") String estado,
         @Param("p_fecha") Date fecha,
         @Param("p_hora") String hora,
-        @Param("p_cedPaciente") Integer cedPaciente
+        @Param("p_cedPaciente") Long cedPaciente
     );
 }

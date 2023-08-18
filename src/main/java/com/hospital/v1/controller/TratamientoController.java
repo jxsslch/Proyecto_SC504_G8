@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.hospital.v1.service.PacienteService;
 import com.hospital.v1.service.TratamientoService;
-
+import com.hospital.v1.domain.Tratamiento;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -42,25 +42,24 @@ public class TratamientoController {
         return "tratamiento";
     }   
 
-//    @PostMapping("/guardar")
-//    public String guardarTelPaciente(@ModelAttribute TelPaciente telPac) {
-//        System.out.println(telPacService.insertTelPaciente(telPac.getIdTelPaciente(),telPac.getPaciente().getCedPaciente() , telPac.getNumTelefono()));
-//        return "redirect:/telPaciente/";
-//    }
-//
-//    
-//    @PostMapping("/actualizar")
-//    public String actualizarPaciente(@ModelAttribute TelPaciente telPac){
-//        telPacService.updateTelPaciente(telPac.getIdTelPaciente(), 
-//                telPac.getNumTelefono());
-//        return "redirect:/telPaciente/";
-//    }
-//    
-//
-//    @PostMapping("/borrar")
-//    public String borrarPaciente(@ModelAttribute TelPaciente telPacario) {
-//        telPacService.deleteTelPaciente(telPacario.getIdTelPaciente());
-//        return "redirect:/telPacario/";
-//    }
+    @PostMapping("/guardar")
+    public String guardarTrat(@ModelAttribute Tratamiento trat) {
+        tratService.guardarTratamiento(trat);
+        return "redirect:/tratamiento/";
+    }
+
+    
+    @PostMapping("/actualizar")
+    public String actualizarTrat(@ModelAttribute Tratamiento trat){
+        tratService.actualizarTratamiento(trat);
+        return "redirect:/tratamiento/";
+    }
+    
+
+    @PostMapping("/borrar")
+    public String borrarTrat(@ModelAttribute Tratamiento trat) {
+        tratService.eliminarTratamiento(trat);
+        return "redirect:/tratamiento/";
+    }
 
 }

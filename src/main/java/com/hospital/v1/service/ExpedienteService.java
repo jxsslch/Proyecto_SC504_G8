@@ -12,5 +12,11 @@ import java.util.List;
 public interface ExpedienteService {
     public List<Expediente> getExpedientes();
     
+    public String insertExpedienteProcedure(
+        Integer p_idExpediente,
+        Long p_cedDoctor,
+        Long p_cedPaciente,
+        Integer p_numCita
+    );
     
 }

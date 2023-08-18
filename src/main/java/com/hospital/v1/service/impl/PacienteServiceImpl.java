@@ -20,6 +20,7 @@ public class PacienteServiceImpl implements PacienteService{
     private PacienteDao pacienteDao;
 
     @Override
+    @Transactional(readOnly = true)
     public Paciente getPacienteByCedPaciente(Long cedPaciente) {
         return pacienteDao.traerPaciente(cedPaciente);
     }

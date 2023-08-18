@@ -7,6 +7,7 @@ package com.hospital.v1.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.hospital.v1.domain.Doctor;
 import java.util.*;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
@@ -18,7 +19,8 @@ public interface DoctorDao extends JpaRepository<Doctor, Long> {
     @Procedure(name = "Doctor.getDoctors")
     List<Doctor> getDoctors();
     
-    @Procedure(name = "TraerDoctor", outputParameterName = "v_doctor")
+    
+    @Procedure(name = "Doctor.getDoctorByCed")
     Doctor traerDoctor(@Param("p_cedDoctor") Long cedDoctor);
     
     @Procedure(name = "AgregarDoctor")
@@ -37,5 +39,6 @@ public interface DoctorDao extends JpaRepository<Doctor, Long> {
     
     @Procedure(name="EliminarDoctor")
     void eliminarDoctor(@Param("p_cedDoctor") Long cedDoctor);
+
 
 }

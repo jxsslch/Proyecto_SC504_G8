@@ -4,6 +4,7 @@ package com.hospital.v1.service;
 import com.hospital.v1.domain.Doctor;
 import java.util.List;
 import java.util.HashMap;
+import java.util.Optional;
 
 public interface DoctorService {
     public Doctor getDoctorDetails(Long cedDoctor);

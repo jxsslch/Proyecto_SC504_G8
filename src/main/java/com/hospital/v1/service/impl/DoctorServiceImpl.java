@@ -7,6 +7,7 @@ import com.hospital.v1.service.DoctorService;
 import com.hospital.v1.service.TelDoctorService;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Doctor getDoctorByCedDoctor(Long cedDoctor) {
         return doctorDao.traerDoctor(cedDoctor);
     }

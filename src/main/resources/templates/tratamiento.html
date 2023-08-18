@@ -79,7 +79,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="addTratModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addTratModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/guardar}" th:object="${trat}" method="POST">
+                        <form th:action="@{/tratamiento/guardar}" th:object="${trat}" method="POST">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Añadir Tratamiento</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -101,10 +101,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                     </div>
                                 </div>
                                 
-                                <div class="form-group">
+                                 <div class="form-group">
                                     <label for="cirugia">Cirugia</label>
-                                    <input type="text" class="form-control" name="cirugia" required>
-                                </div>
+                                    <div class="form-group">
+                                        <select class="form-select" name="cirugia" required>
+                                            <option  value="S">Sí</option>
+                                            <option  value="N">No</option>
+                                        </select>
+                                    </div>
+                                </div> 
                                 
                                 <div class="form-group">
                                     <label for="cedPaciente">Cédula</label>
@@ -132,7 +137,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="editTratModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editTratModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/actualizar}" th:object="${trat}" method="POST">
+                        <form th:action="@{/tratamiento/actualizar}" th:object="${trat}" method="POST">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Editar Tratamientos</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -145,17 +150,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 
                                <div class="form-group">
                                     <label for="visitaEspecialista">Especialista</label>
-                                    <div class="form-group">
-                                        <select id="especialista" class="form-select" name="doctor.puesto"  required>
-                                            <option th:each="doctor : ${Doctores}" th:text="${doctor.puesto}" th:value="${doctor.puesto}"></option>
-                                        </select>
-                                    </div>
+                                    <input id="especialista" type="text" class="form-control" name="visitaEspecialista" required>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="cirugia">Cirugia</label>
-                                    <input id="cirugia" type="text" class="form-control" name="cirugia" required>
-                                </div>
+                                    <div class="form-group">
+                                        <select id="cirugia" class="form-select" name="cirugia" required>
+                                            <option  value="S">Sí</option>
+                                            <option  value="N">No</option>
+                                        </select>
+                                    </div>
+                                </div> 
                                 
                                 <div class="form-group">
                                     <label for="cedPaciente">Cédula</label>
@@ -183,7 +189,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="deleteTelPacModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/borrar}" th:object="${trat}" method="POST">
+                        <form th:action="@{/tratamiento/borrar}" th:object="${trat}" method="POST">
                             <input id='hiddenCedula' type='hidden' name='idTratamiento'>
                             <div class="modal-header">						
                                 <h4 class="modal-title">Borrar Tratamiento</h4>

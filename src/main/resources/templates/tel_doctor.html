@@ -75,7 +75,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="addTelDocModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addTelDocModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/guardar}" th:object="${telDoc}" method="POST">
+                        <form th:action="@{/telDoctor/guardar}" th:object="${telDoc}" method="POST">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Añadir Tel. Doctor</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -117,7 +117,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="editTelDocModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editTelDocModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/actualizar}" th:object="${telDoc}" method="POST">
+                        <form th:action="@{/telDoctor/actualizar}" th:object="${telDoc}" method="POST">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Editar Doctor</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -166,7 +166,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="deleteTelDocModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/borrar}" th:object="${telDoc}" method="POST">
+                        <form th:action="@{/telDoctor/borrar}" th:object="${telDoc}" method="POST">
                             <input id='hiddenCedula' type='hidden' name='ceddoctor'>
                             <div class="modal-header">						
                                 <h4 class="modal-title">Borrar Doctor</h4>

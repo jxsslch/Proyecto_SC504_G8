@@ -67,10 +67,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                        th:attr="onclick=|populateModalFields('${cita.numCita}', '${cita.motivo}', '${cita.estado}', '${cita.fecha}', '${cita.hora}', '${cita.paciente.cedPaciente}')|">
                                         <i class="fa fa-edit" data-toggle="tooltip" title="Editar"></i>
                                     </a>
-                                    <a data-bs-toggle="modal" type="button" data-bs-target="#deleteCitaModal" class="delete"
-                                       th:attr="onclick=|deleteModalField('${cita.numCita}')|">
-                                        <i class="fa fa-trash" data-toggle="tooltip" title="Borrar"></i>
-                                    </a>
+                                   
                                 </td>
                         </tbody>
                     </table>
@@ -80,7 +77,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Add Modal HTML -->
         <section>
-            <div id="addCitaModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addCitaModal" aria-hidden="true">
+            <div id="addCitasModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addCitasModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form th:action="@{/guardar}" th:object="${cita}" method="POST">
@@ -142,7 +139,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Edit Modal HTML -->
         <section>
-            <div id="editCitasModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editCitasModal" aria-hidden="true">
+            <div id="editCitaModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editCitaModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form th:action="@{/actualizar}" th:object="${citas}" method="POST">
@@ -164,7 +161,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                <div class="form-group">
                                     <label for="estado">Estado</label>
                                     <div class="form-group">
-                                        <select class="form-select" name="estado" required>
+                                        <select id="btn-estado" class="form-select" name="estado" required>
                                             <option value="A">Activo</option>
                                             <option value="C">Cancelada</option>
                                         </select>
@@ -202,30 +199,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </section>
 
 
-        <!-- Delete Modal HTML -->
-        <section>
-            <div id="deleteTelPacModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form th:action="@{/borrar}" th:object="${cita}" method="POST">
-                            <input id='hiddenCedula' type='hidden' name='numCita'>
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Borrar Citas</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="close"></button>
-                            </div>
-                            <div class="modal-body">					
-                                <p>Are you sure you want to delete these Records?</p>
-                                <p class="text-warning"><small>This action cannot be undone.</small></p>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                                <input type="submit" class="btn btn-danger" value="Delete">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
 
 

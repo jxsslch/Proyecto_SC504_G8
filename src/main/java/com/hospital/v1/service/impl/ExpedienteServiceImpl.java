@@ -23,6 +23,11 @@ public class ExpedienteServiceImpl implements ExpedienteService {
     public List<Expediente> getExpedientes() {
         return expedDao.getExpedientes();
     }
+
+    @Override
+    public String insertExpedienteProcedure(Integer p_idExpediente, Long p_cedDoctor, Long p_cedPaciente, Integer p_numCita) {
+        return expedDao.insertExpedienteProcedure(p_idExpediente, p_cedDoctor, p_cedPaciente, p_numCita);
+    }
     
     
 }

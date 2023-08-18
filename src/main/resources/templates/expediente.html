@@ -34,9 +34,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <button data-bs-toggle="modal" type="button" data-bs-target="#addExpedienteModal" class="btn btn-success">
                                 <i class="fa fa-plus"></i><span> Añadir Expediente</span>
                             </button>
-                            <button data-toggle="modal" type="button" data-bs-target="#deleteExpedienteModal" class="btn btn-danger" >
-                                <i class="fa fa-minus"></i><span> Borrar</span>
-                            </button>	
+                          
 
                         </div>
                     </div>
@@ -58,13 +56,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <td>[[${expediente.citas.numCita}]]</td>
                                 <td>
                                     <a data-bs-toggle="modal" type="button" data-bs-target="#editExpedienteModal" class="edit" 
-                                       th:attr="onclick=|populateModalFields('${expediente.idExpediente}', '${expediente.doctor.nomdoctor}', '${expediente.paciente.cedPaciente}', '${expediente.citas.numCita}')|">
+                                       th:attr="onclick=|populateModalFields('${expediente.idExpediente}', '${expediente.doctor.ceddoctor}', '${expediente.paciente.cedPaciente}', '${expediente.citas.numCita}')|">
                                         <i class="fa fa-edit" data-toggle="tooltip" title="Editar"></i>
                                     </a>
-                                    <a data-bs-toggle="modal" type="button" data-bs-target="#deleteExpedienteModal" class="delete"
-                                       th:attr="onclick=|deleteModalField('${expediente.idExpediente}')|">
-                                        <i class="fa fa-trash" data-toggle="tooltip" title="Borrar"></i>
-                                    </a>
+                                    
                                 </td>
                                 <!-- HiddenValues  -->
                                 <td ></td>
@@ -131,10 +126,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <!-- Edit Modal HTML -->
         <section>
-            <div id="editPacienteModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editPacienteModal" aria-hidden="true">
+            <div id="editExpedienteModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editExpedienteModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/paciente/actualizar}" th:object="${paciente}" method="POST">
+                        <form th:action="@{/expediente/actualizar}" th:object="${expediente}" method="POST">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Editar Paciente</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -176,32 +171,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
                                 <input type="submit" class="btn btn-success" value="Update">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Delete Modal HTML -->
-        <section>
-            <div id="deleteExpedienteModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form th:action="@{/expediente/borrar}" th:object="${expediente}" method="POST">
-                            <input id='hiddenCedula' type='hidden' name='idExpediente'>
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Borrar Expediente</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true" aria-label="close"></button>
-                            </div>
-                            <div class="modal-body">					
-                                <p>Are you sure you want to delete these Records?</p>
-                                <p class="text-warning"><small>This action cannot be undone.</small></p>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                                <input type="submit" class="btn btn-danger" value="Delete">
                             </div>
                         </form>
                     </div>

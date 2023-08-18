@@ -23,13 +23,13 @@ import lombok.Setter;
 )
 
 @NamedStoredProcedureQuery(
-    name = "TraerPaciente",
-    procedureName = "paciente_package.TraerPaciente",
+    name = "Paciente.getPacienteByCed",
+    procedureName = "get_paciente",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cedPaciente", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "v_paciente", type = void.class)
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "p_cursor", type = void.class)
     },
-    resultClasses = { Paciente.class }
+    resultClasses = Paciente.class
 )
 @NamedStoredProcedureQuery(
         name = "AgregarPaciente",

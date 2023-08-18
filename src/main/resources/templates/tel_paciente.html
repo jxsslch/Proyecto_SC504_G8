@@ -75,7 +75,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="addTelPacModal" tabindex="-1" class="modal fade" data-bs-backdrop="static" aria-labelledby="addTelPacModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/guardar}" th:object="${telDoc}" method="POST">
+                        <form th:action="@{/telPaciente/guardar}" th:object="${telPac}" method="POST">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Añadir Tel. Paciente</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -117,7 +117,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="editTelPacModal" tabindex="-1" class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" aria-labelledby="editTelPacModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/actualizar}" th:object="${telDoc}" method="POST">
+                        <form th:action="@{/telPaciente/actualizar}" th:object="${telPac}" method="POST">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Editar Paciente</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
@@ -159,7 +159,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div id="deleteTelPacModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form th:action="@{/borrar}" th:object="${telPac}" method="POST">
+                        <form th:action="@{/telPaciente/borrar}" th:object="${telPac}" method="POST">
                             <input id='hiddenCedula' type='hidden' name='cedPaciente'>
                             <div class="modal-header">						
                                 <h4 class="modal-title">Borrar Paciente</h4>

@@ -23,6 +23,21 @@ public class TratamientoServiceImpl implements TratamientoService {
     public List<Tratamiento> getTratamientos() {
        return tratDao.getTratamientos();
     }
+
+    @Override
+    public void guardarTratamiento(Tratamiento trat) {
+       tratDao.save(trat);
+    }
+
+    @Override
+    public void eliminarTratamiento(Tratamiento trat) {
+       tratDao.delete(trat);
+    }
+
+    @Override
+    public void actualizarTratamiento(Tratamiento trat) {
+        tratDao.save(trat);
+    }
     
     
 }

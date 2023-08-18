@@ -10,4 +10,10 @@ import java.util.List;
 
 public interface TratamientoService {
     List<Tratamiento> getTratamientos();
+    
+    void guardarTratamiento(Tratamiento trat);
+    
+    void eliminarTratamiento(Tratamiento trat);
+    
+    void actualizarTratamiento(Tratamiento trat);
 }

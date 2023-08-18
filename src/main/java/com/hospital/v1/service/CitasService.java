@@ -12,7 +12,7 @@ public interface CitasService {
     
     public List<Citas> getCitas();
     
-    public String insertarCitas(Integer numCita, String motivo, String estado, Date fecha, String hora, Integer cedPaciente);
+    public String insertarCitas(Integer numCita, String motivo, String estado, Date fecha, String hora, Long cedPaciente);
     
-    public String actualizarCitas(Integer numCita, String motivo, String estado, Date fecha, String hora, Integer cedPaciente);
+    public String actualizarCitas(Integer numCita, String motivo, String estado, Date fecha, String hora, Long cedPaciente);
 }
